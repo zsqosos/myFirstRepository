@@ -1,26 +1,66 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>My Proverb</title>
-    <link rel="stylesheet" href="index.css"/>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <!--<link rel="stylesheet" href="font-awesome.min.css">-->
-    <!--<link rel="stylesheet" href="font-awesome-ie7.min.css">-->
-</head>
-<body>
-    <div class="container">
-        <div id="passages">
-            <div class="text active"><i class="fa fa-quote-left"></i><span class="">这张面具之下不止是肉体，这张面具之下是一种思想，而思想是不怕子弹的 。</span></div>
-            <div class="film"><span>—— 《V字仇杀队》</span></div>
-        </div>
-        <div class="buttons">
-            <a class="button" target="_blank" href="http://weixin.qq.com/"><i class="fa fa-wechat"></i></a>
-            <a class="button" target="_blank" href="http://weibo.com/"><i class="fa fa-weibo"></i></a>
-            <div class="next"><a class="button" href="javascript:;">NEXT</a></div>
-        </div>
-    </div>
-    <div class="footer">By ZhangShiqiang</div>
-    <script src="next.js"></script>
-</body>
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Template • TodoMVC</title>
+		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+		<!-- CSS overrides - remove if you don't need it -->
+		<link rel="stylesheet" href="css/app.css">
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<section class="todoapp">
+			<header class="header">
+				<h1>todos</h1>
+				<input v-model="text" v-on:keydown.enter="add" class="new-todo" placeholder="What needs to be done?" autofocus>
+			</header>
+			<!-- This section should be hidden by default and shown when there are todos -->
+			<section class="main">
+				<input class="toggle-all" type="checkbox">
+				<label for="toggle-all">Mark all as complete</label>
+				<ul class="todo-list">
+					<!-- These are here just to show the structure of the list items -->
+					<!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
+					<li v-for="todo in todos" v-bind:class="{completed:todo.completed}">
+						<div class="view">
+							<input v-model="todo.completed" class="toggle" type="checkbox">
+							<label>{{todo.text}}</label>
+							<button v-on:click="remove(todo.id)" class="destroy"></button>
+						</div>
+						<input class="edit" v-model="todo.text">
+					</li>
+				</ul>
+			</section>
+			<!-- This footer should hidden by default and shown when there are todos -->
+			<footer class="footer">
+				<!-- This should be `0 items left` by default -->
+				<span class="todo-count"><strong>{{todos.length}}</strong> item left</span>
+				<!-- Remove this if you don't implement routing -->
+				<ul class="filters">
+					<li>
+						<a class="selected" href="#/">All</a>
+					</li>
+					<li>
+						<a href="#/active">Active</a>
+					</li>
+					<li>
+						<a href="#/completed">Completed</a>
+					</li>
+				</ul>
+				<!-- Hidden if no completed items are left ↓ -->
+				<button class="clear-completed">Clear completed</button>
+			</footer>
+		</section>
+		<footer class="info">
+			<p>Double-click to edit a todo</p>
+			<!-- Remove the below line ↓ -->
+			<p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
+			<!-- Change this out with your name and url ↓ -->
+			<p>Created by <a href="http://todomvc.com">you</a></p>
+			<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+		</footer>
+		<!-- Scripts here. Don't remove ↓ -->
+		<script src="js/app.js"></script>
+	</body>
 </html>
