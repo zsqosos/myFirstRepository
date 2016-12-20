@@ -17,18 +17,18 @@
 			</header>
 			<!-- This section should be hidden by default and shown when there are todos -->
 			<section class="main">
-				<input class="toggle-all" type="checkbox">
+				<input class="toggle-all" type="checkbox" v-on:click="toggleAll()">
 				<label for="toggle-all">Mark all as complete</label>
 				<ul class="todo-list">
 					<!-- These are here just to show the structure of the list items -->
 					<!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-					<li v-for="todo in todos" v-bind:class="{completed:todo.completed}">
+					<li v-for="todo in todos" v-bind:class="{completed:todo.completed,editing:todo.id===currentEditingId}">
 						<div class="view">
 							<input v-model="todo.completed" class="toggle" type="checkbox">
-							<label>{{todo.text}}</label>
+							<label v-on:dblclick="editing(todo.id)">{{todo.text}}</label>
 							<button v-on:click="remove(todo.id)" class="destroy"></button>
 						</div>
-						<input class="edit" v-model="todo.text">
+						<input class="edit" v-model="todo.text" v-on:keydown.enter="save">
 					</li>
 				</ul>
 			</section>
@@ -49,7 +49,7 @@
 					</li>
 				</ul>
 				<!-- Hidden if no completed items are left ↓ -->
-				<button class="clear-completed">Clear completed</button>
+				<button class="clear-completed" v-on:click="clear" v-show="existCompleted()">Clear completed</button>
 			</footer>
 		</section>
 		<footer class="info">
@@ -57,7 +57,7 @@
 			<!-- Remove the below line ↓ -->
 			<p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
 			<!-- Change this out with your name and url ↓ -->
-			<p>Created by <a href="http://todomvc.com">you</a></p>
+			<p>Created by <a href="http://todomvc.com">zsq</a></p>
 			<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
 		</footer>
 		<!-- Scripts here. Don't remove ↓ -->
